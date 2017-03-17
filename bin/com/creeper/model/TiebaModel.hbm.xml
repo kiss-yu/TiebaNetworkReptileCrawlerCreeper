@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-12-22 22:25:55 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.creeper.model.TiebaModel" table="tiebas">
+        <id name="id" type="int">
+            <column name="ID" />
+            <generator class="increment" />
+        </id>
+        <property name="tieba_name" type="java.lang.String">
+            <column name="TIEBA_NAME" />
+        </property>
+        <property name="tieba_user_number" type="java.lang.Integer">
+            <column name="TIEBA_USER_NUMBER" />
+        </property>
+        <property name="create_time" type="java.util.Date">
+            <column name="CREATE_TIME" />
+        </property>
+        <property name="post_number" type="java.lang.Integer">
+            <column name="POST_NUMBER" />
+        </property>
+        <property name="url" type="java.lang.String">
+            <column name="URL" />
+        </property>
+        <list name="postLists" inverse="false" table="posts" lazy="true">
+            <key>
+                <column name="tiebaid" />
+            </key>
+            <list-index></list-index>
+            <one-to-many class="com.creeper.model.PostModel" />
+        </list>
+    </class>
+</hibernate-mapping>
