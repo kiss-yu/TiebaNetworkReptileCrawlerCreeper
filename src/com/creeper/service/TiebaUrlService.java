@@ -3,6 +3,7 @@ package com.creeper.service;
 import com.creeper.Exception.AddException;
 import com.creeper.Exception.UpdateException;
 import com.creeper.dao.TiebaUrlMapper;
+import com.creeper.hibernate.util.HibernateUtil;
 import com.creeper.model.TiebaUrlModel;
 
 public class TiebaUrlService {
@@ -11,7 +12,7 @@ public class TiebaUrlService {
 	
 	public void save(TiebaUrlModel model) {
 		try {
-			if (!isHave(model.getUrl())) {
+			if (!isHave(model.getMd3())) {
 				mapper.insert(model);
 			}else {
 			}
@@ -20,8 +21,8 @@ public class TiebaUrlService {
 		}
 	}
 	
-	public boolean isHave(String url) {
-		if (mapper.selectByUrl(url) == null) {
+	public boolean isHave(String md3) {
+		if (mapper.selectByMd3(md3) == null) {
 			return false;
 		}
 		return true;
@@ -34,7 +35,7 @@ public class TiebaUrlService {
 			System.out.println("==更新了==");
 			return null;
 		}else {
-			model.setGet(true);
+			model.setIsGet(true);
 			mapper.update(model);
 			return model.getUrl();
 		}

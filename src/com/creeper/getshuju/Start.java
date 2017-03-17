@@ -20,4 +20,9 @@ public class Start {
 		TopPareant.setROOTDOC(con.get());
 	}
 	
+	public  String startGetPost(String root) throws IOException {
+		Connection con = Jsoup.connect(root);
+		return con.get().toString();
+	}
+	
 }

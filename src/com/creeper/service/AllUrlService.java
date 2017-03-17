@@ -15,8 +15,9 @@ public class AllUrlService {
 	
 	public void sava(AllUrlModel model) {
 		try {
-			if (!isHave(model.getUrl())) {
+			if (!isHave(model.getMd3())) {
 				model.setIsHaveChild(true);
+				model.setChildFinish(false);
 				mapper.insert(model);
 			}
 		} catch (AddException e) {
@@ -33,17 +34,21 @@ public class AllUrlService {
 			mapper.update(pareant);
 			return getUrl();
 		}
-		return updataChildUrl(childMapper.getUrlChild(pareant));
-	}
-	
-	private String updataChildUrl(ChildUrlModel model) {
-		model.setGet(true);
-		childMapper.updata(model);
+		ChildUrlModel model=updataChildUrl(childMapper.getUrlChild(pareant));
+		if (isGet(model)) {
+			getUrl();
+		}
 		return model.getUrl();
 	}
 	
+	private ChildUrlModel updataChildUrl(ChildUrlModel model) {
+		model.setIsGet(true);
+		childMapper.updata(model);
+		return model;
+	}
+	
 	private boolean isHave(String url) {
-		if (mapper.selectByUrl(url) != null) {
+		if (mapper.selectByMd3(url) != null) {
 			return true;
 		}
 		return false;
@@ -57,6 +62,12 @@ public class AllUrlService {
 		} catch (DeleteException e) {
 			e.printStackTrace();
 		}
+	}
 	
+	private boolean isGet(ChildUrlModel model) {
+		if(mapper.selectByUrl(model.getUrl()) != null){
+			 return true;
+		}
+		return false;
 	}
 }

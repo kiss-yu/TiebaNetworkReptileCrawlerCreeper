@@ -7,19 +7,18 @@
     	<property name="connection.username">root</property>
     	<property name="connection.password"></property>
     	<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-    	<property name="connection.url">jdbc:mysql://localhost:3306/tiebas?useUnicode=true&amp;characterEncoding=UTF-8</property>
-    	<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
-    	<property name="show_sql">false</property>
+    	<property name="connection.url">jdbc:mysql:///tiebas?useUnicode=true&amp;characterEncoding=gbk</property>
+    	<property name="dialect">com.creeper.hibernate.util.MySQL5InnoDBDialect</property>
+		<property name="show_sql">false</property>
     	<property name="format_sql">false</property>
-    	<property name="hbm2ddl.auto">update</property>
-    	
-    	<mapping resource="com/creeper/model/AgoUrlsModel.hbm.xml"/>
-    	<mapping resource="com/creeper/model/TiebaModel.hbm.xml"/>
-    	<mapping resource="com/creeper/model/PostModel.hbm.xml"/>
-    	<mapping resource="com/creeper/model/AllUrlModel.hbm.xml"/>
-    	<mapping resource="com/creeper/model/TiebaUrlModel.hbm.xml"/>
-    	<mapping resource="com/creeper/model/ChildUrlModel.hbm.xml"/>
-    	<mapping resource="com/creeper/model/Test.hbm.xml"/>
+    	<property name="hbm2ddl.auto">updata</property>
+		<property name="current_session_context_class">thread</property>
+    	 <mapping class="com.creeper.model.AllUrlModel"/>
+    	<mapping class="com.creeper.model.ChildUrlModel"/>
+    	<mapping class="com.creeper.model.TiebaUrlModel"/>
+    	<mapping class="com.creeper.model.TiebaModel"/>
+		<mapping class="com.creeper.model.TiebaInforModel"/>
+    	<mapping class="com.creeper.model.PostModel"/> 
     </session-factory>
     
 </hibernate-configuration>

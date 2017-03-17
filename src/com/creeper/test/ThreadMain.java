@@ -23,11 +23,11 @@ public class ThreadMain{
 	private TiebaUrlService tiebaUrlService=new TiebaUrlService();
 	
 	public ThreadMain(String rootUrl){
+//		allUrlService.init();
 		this.rootUrl=rootUrl;
 	}
 	
 	public AllUrlModel init() {
-		allUrlService.init();
 		rootModel.setUrl(rootUrl);
 		rootModel.setChildFinish(false);
 		rootModel.setIsHaveChild(true);
@@ -38,10 +38,10 @@ public class ThreadMain{
 		while(true){
 			try {
 				start.startThread(getUrl());
-//				System.out.println("url=="+rootModel.getUrl());
+				System.out.println("url=="+rootModel.getUrl());
 				savaMap(url.getUrlMap());
-			} catch (IOException | UpdateException e) {
-				System.out.println(e.toString()+"url错误！！！");
+			} catch (Exception e) {
+				System.out.println(e.toString()+"    url错误！！！");
 			}
 		}
 	}

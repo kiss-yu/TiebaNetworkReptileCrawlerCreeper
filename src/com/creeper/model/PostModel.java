@@ -3,33 +3,39 @@ package com.creeper.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.*;
+
 import com.creeper.util.MyTool;
 
+import org.hibernate.annotations.GenericGenerator;
 
+
+@Entity
+@Table(name = "posts")
 public class PostModel implements Serializable {
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 	private int id;
-	private Integer sort;
 	private String posttitle;
 	private String createAuthor;
 	private String url;
 	private Date endtime;
-	private Integer tiebaid;
+	private TiebaInforModel inforModel;
+	private String tiebaName;
+	private Integer inforid;
+
+	@Id
+	@GeneratedValue(generator = "uuid")
+	@GenericGenerator(name = "uuid",strategy = "increment")
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
-	public Integer getSort() {
-		return sort;
-	}
-	public void setSort(Integer sort) {
-		this.sort = sort;
-	}
+	@Column(length = 500)
 	public String getPosttitle() {
 		return posttitle;
 	}
@@ -42,6 +48,7 @@ public class PostModel implements Serializable {
 	public void setCreateAuthor(String createAuthor) {
 		this.createAuthor = createAuthor;
 	}
+	@Column(length = 100)
 	public String getUrl() {
 		return url;
 	}
@@ -54,22 +61,37 @@ public class PostModel implements Serializable {
 	public void setEndtime(Date endtime) {
 		this.endtime = endtime;
 	}
-	public Integer getTiebaid() {
-		return tiebaid;
+	@ManyToOne(cascade = {CascadeType.ALL},fetch = FetchType.EAGER)
+	@JoinColumn(name = "inforid",updatable=false,insertable=false)
+	public TiebaInforModel getInforModel() {
+		return inforModel;
 	}
-	public void setTiebaid(Integer tiebaid) {
-		this.tiebaid = tiebaid;
+	public void setInforModel(TiebaInforModel inforModel) {
+		this.inforModel = inforModel;
 	}
-	
 
+	public String getTiebaName() {
+		return tiebaName;
+	}
+
+	public void setTiebaName(String tiebaName) {
+		this.tiebaName = tiebaName;
+	}
+
+
+	public Integer getInforid() {
+		return inforid;
+	}
+	public void setInforid(Integer inforid) {
+		this.inforid = inforid;
+	}
 	
 	@Override
 	public String toString() {
 		return  "\n"+"帖子名=="+getPosttitle()+"\n"
 				+ "作者=="+getCreateAuthor()+"\n"
 						+ "时间=="+MyTool.getGoodTime(getEndtime())+"\n"
-								+ "排名=="+getSort()+"\n"
 										+ "地址=="+getUrl();
 	}
-	
+
 }

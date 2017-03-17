@@ -1,6 +1,7 @@
 package com.creeper.dao;
 
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Session;
 
@@ -22,11 +23,11 @@ public class PostsMapper{
 	}
 
 	public void delete() throws DeleteException {
-		
+
 	}
 
 	public void updata(Object obj) throws UpdateException {
-		
+
 	}
 
 	public List<Object> select(Object obj) {
